@@ -1,0 +1,56 @@
+<body>
+        <br>
+        <h3 *ngIf="todos" else noTodo><i>{{entry}}</i></h3>
+        <div class="row">
+            <ng-template #noTodo>
+                <div class="alert alert-danger" role="alert">
+                    Yapılacaklar Listesi Boş!
+                </div>
+                
+            </ng-template>
+            <br>
+            <div *ngFor="let todo of todos" class="card text-center" style="width: 18rem;">
+                <img *ngIf="todo.is_completed" [src]="possitiveLink" class="card-img-top" width="300" height="250"
+                    alt="...">
+                <img *ngIf="!todo.is_completed" [src]="hourglassLink" class="card-img-top" width="300" height="250"
+                    alt="...">
+
+                <div class="card-footer " >
+                    <h5 class="card-title">{{todo.title}}</h5>
+                  <div>  
+                    <ng-template #content let-c="close" let-d="dismiss">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="modal-basic-title">{{todo.title}}</h4>
+                          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>{{todo.description}}</p>
+                        </div>
+ 
+                      </ng-template>
+                    <button type="button" class="btn btn-link"(click)="open(content)" ><b>Açıklama</b></button>
+                    <br>
+                    <p class="card-text"><small class="text-muted">Oluşturulma Tarihi:<br>{{todo.created_at | date:'dd.MM.yyyy  HH:mm'}}</small></p>
+                    <p *ngIf="todo.is_completed" class="card-text" ><small
+                            class="text-muted">Tamamlanma
+                            Tarihi:<br> {{todo.updated_at| date:'dd.MM.yyyy  HH:mm'}}</small></p>
+                    <p *ngIf="!todo.is_completed" class="card-text"><small
+                            class="text-muted">Henüz<br>
+                            Tamamlanmadı</small></p>
+
+                    <a *ngIf="!todo.is_completed" (click)="update(todo._id)" class="btn btn-primary"
+                        style="height:35px;width:100px">Tamamla </a>
+                    &nbsp;
+                    &nbsp;
+                    <a (click)="delete(todo._id)" class="btn btn-danger" style="height:35px;width:100px">Sil </a>
+                </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+<footer>
+    <button class="btn-1" routerLink="/add">EKLE</button>
+  </footer>

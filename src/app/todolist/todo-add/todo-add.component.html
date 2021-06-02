@@ -1,0 +1,23 @@
+<content>
+<br>
+<h3>Yeni Görev Ekleme</h3>
+<br>
+<form [formGroup]="todoAddForm" (ngSubmit)="add()">
+    <div class="form-group mb-2" >
+        <input type="text" id="title" name="title" formControlName="title" class="form-control"
+            placeholder="Görev Başlığı">
+        <div class="alert alert-warning"
+            *ngIf="todoAddForm.get('title')!.invalid &&todoAddForm.get('title')!.hasError('required') && todoAddForm.get('title')!.dirty">Görev başlığı
+            zorunludur</div>
+    </div>
+    <div class="form-group mb-2">
+        <input type="text" id="description" name="description" formControlName="description" class="form-control"
+         placeholder="Görev Açıklaması">
+        <div class="alert alert-warning"
+            *ngIf="todoAddForm.get('description')!.invalid &&todoAddForm.get('description')!.hasError('required') && todoAddForm.get('description')!.dirty">
+            Görev açıklaması zorunludur</div>
+    </div>
+    <button type="submit" class="btn btn-success" >Görev Ekle</button>
+</form>
+
+</content>
